@@ -4,6 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luz da Lua — Brownies Artesanales · Guayaquil</title>
+<meta name="description" content="Brownies artesanales hechos a mano en Guayaquil por Gigi. Ingredientes reales, toppings al gusto y pedidos directos por WhatsApp 🍫">
+<meta name="theme-color" content="#1E0F07">
+<meta name="author" content="Luz da Lua">
+<link rel="icon" type="image/png" href="uploads/Logo.png">
+<link rel="apple-touch-icon" href="uploads/Logo.png">
+
+<!-- Open Graph (WhatsApp, Facebook, LinkedIn, Instagram) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Luz da Lua">
+<meta property="og:locale" content="es_EC">
+<meta property="og:title" content="Luz da Lua — Brownies que no se olvidan 🍫">
+<meta property="og:description" content="Brownies artesanales hechos a mano en Guayaquil. Arma tu pedido, elige tus toppings y escríbenos directo por WhatsApp.">
+<meta property="og:url" content="https://luz-da-lua.vercel.app/">
+<meta property="og:image" content="https://luz-da-lua.vercel.app/uploads/Brownie%202%20pisos%20manjar%20y%20chocolate%20.png">
+<meta property="og:image:alt" content="Brownie artesanal de 2 pisos con manjar y chocolate de Luz da Lua">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Luz da Lua — Brownies que no se olvidan 🍫">
+<meta name="twitter:description" content="Brownies artesanales hechos a mano en Guayaquil. Arma tu pedido por WhatsApp.">
+<meta name="twitter:image" content="https://luz-da-lua.vercel.app/uploads/Brownie%202%20pisos%20manjar%20y%20chocolate%20.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
@@ -251,11 +275,14 @@ footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;
 .btn-wa-full:hover{background:#1aad54}
 
 /* ─── WHATSAPP FAB ─── */
-.wa-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;border:none;cursor:pointer;z-index:300;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;text-decoration:none}
+.wa-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;border:none;cursor:pointer;z-index:300;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.45);transition:opacity .3s,transform .3s,box-shadow .2s,background .2s;text-decoration:none}
 .wa-fab:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(37,211,102,.55);background:#1aad54}
 .wa-fab svg{width:28px;height:28px;position:relative;z-index:1}
 .wa-fab::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #25D366;opacity:.5;animation:waPulse 2s infinite;pointer-events:none}
 @keyframes waPulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.45);opacity:0}}
+/* Ocultar FAB cuando molesta: carrito abierto o dentro del builder en móvil */
+body.hide-fab .wa-fab{opacity:0;pointer-events:none;transform:translateY(20px) scale(.9)}
+body.hide-fab .wa-fab::after{animation:none}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:960px){
@@ -323,9 +350,6 @@ footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;
     color:rgba(245,237,230,.5);font-family:var(--font-b);font-weight:500;
   }
   .btn-builder-add{margin:0;padding:13px 16px;font-size:.82rem}
-  /* WhatsApp FAB: se oculta dentro del builder vía JS (clase .hide-fab en body) */
-  body.hide-fab .wa-fab{opacity:0;pointer-events:none;transform:translateY(20px)}
-  .wa-fab{transition:opacity .3s,transform .3s}
   .story{grid-template-columns:1fr;gap:40px}
   .story-img{aspect-ratio:16/9}
   .nav-links{display:none}
@@ -711,13 +735,20 @@ function updateCart(){
       <button class="ci-rm" onclick="removeItem('${item.key}')">✕</button>
     </div>`).join('');
 }
+let builderInView=false;
+function syncFab(){
+  const cartOpen=document.getElementById('cartPanel').classList.contains('open');
+  document.body.classList.toggle('hide-fab', cartOpen || builderInView);
+}
 function openCart(){
   document.getElementById('cartPanel').classList.add('open');
   document.getElementById('cartOv').classList.add('open');
+  syncFab();
 }
 function closeCart(){
   document.getElementById('cartPanel').classList.remove('open');
   document.getElementById('cartOv').classList.remove('open');
+  syncFab();
 }
 
 // ── BUILDER ──
@@ -889,11 +920,12 @@ setTimeout(initFadeUps,80);
   if(!builder)return;
   const mq=window.matchMedia('(max-width:960px)');
   const io=new IntersectionObserver(([e])=>{
-    document.body.classList.toggle('hide-fab', mq.matches && e.isIntersecting);
+    builderInView = mq.matches && e.isIntersecting;
+    syncFab();
   },{threshold:0.25});
   io.observe(builder);
   mq.addEventListener?.('change',()=>{
-    if(!mq.matches) document.body.classList.remove('hide-fab');
+    if(!mq.matches){ builderInView=false; syncFab(); }
   });
 })();
 </script>
