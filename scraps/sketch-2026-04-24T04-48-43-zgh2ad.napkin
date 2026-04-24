@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "created": "2026-04-24T04:48:43.827Z",
+  "modified": "2026-04-24T04:50:56.303Z",
+  "objects": [
+    {
+      "id": "evird7zh4",
+      "type": "rect",
+      "x": 126,
+      "y": 127,
+      "width": 1087,
+      "height": 582,
+      "data": {
+        "fill": null,
+        "stroke": "#000000",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "kinnn4rl4",
+      "type": "rect",
+      "x": 154,
+      "y": 145,
+      "width": 1028,
+      "height": 57,
+      "data": {
+        "fill": null,
+        "stroke": "#C2622D",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "lshl740ik",
+      "type": "rect",
+      "x": 198,
+      "y": 244,
+      "width": 368,
+      "height": 395,
+      "data": {
+        "fill": null,
+        "stroke": "#2D7DD2",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "jruwu83ib",
+      "type": "rect",
+      "x": 581,
+      "y": 247,
+      "width": 594,
+      "height": 391,
+      "data": {
+        "fill": null,
+        "stroke": "#8B2500",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "jd0j51i3r",
+      "type": "text",
+      "x": 852,
+      "y": 401,
+      "data": {
+        "content": "video",
+        "fontSize": 16,
+        "color": "#8B2500",
+        "bold": false
+      },
+      "width": 39,
+      "height": 21
+    },
+    {
+      "id": "4zx0yxmqp",
+      "type": "text",
+      "x": 275,
+      "y": 442,
+      "data": {
+        "content": "text",
+        "fontSize": 16,
+        "color": "#8B2500",
+        "bold": false
+      },
+      "width": 27,
+      "height": 21
+    },
+    {
+      "id": "v87r8xpzr",
+      "type": "text",
+      "x": 168,
+      "y": 166,
+      "data": {
+        "content": "logo",
+        "fontSize": 16,
+        "color": "#000000",
+        "bold": false
+      },
+      "width": 33,
+      "height": 21
+    },
+    {
+      "id": "hvh99r52n",
+      "type": "text",
+      "x": 1112,
+      "y": 180,
+      "data": {
+        "content": "carrito",
+        "fontSize": 16,
+        "color": "#000000",
+        "bold": false
+      },
+      "width": 46,
+      "height": 21
+    },
+    {
+      "id": "f28v2473t",
+      "type": "ellipse",
+      "x": 188,
+      "y": 754,
+      "width": 350,
+      "height": 281,
+      "data": {
+        "fill": null,
+        "stroke": "#8B2500",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "cpujpgwkj",
+      "type": "text",
+      "x": 399,
+      "y": 854,
+      "data": {
+        "content": "producto",
+        "fontSize": 16,
+        "color": "#8B2500",
+        "bold": false
+      },
+      "width": 66,
+      "height": 21
+    },
+    {
+      "id": "obkpefgjk",
+      "type": "ellipse",
+      "x": 734,
+      "y": 1082,
+      "width": 417,
+      "height": 309,
+      "data": {
+        "fill": null,
+        "stroke": "#2D7DD2",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "7xwda7aro",
+      "type": "text",
+      "x": 893,
+      "y": 1270,
+      "data": {
+        "content": "prodcuto",
+        "fontSize": 16,
+        "color": "#2D7DD2",
+        "bold": false
+      },
+      "width": 66,
+      "height": 21
+    },
+    {
+      "id": "tao2ngsau",
+      "type": "rect",
+      "x": 629,
+      "y": 827,
+      "width": 498,
+      "height": 179,
+      "data": {
+        "fill": null,
+        "stroke": "#3D7C2F",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "6bpe2qfyk",
+      "type": "text",
+      "x": 828,
+      "y": 906,
+      "data": {
+        "content": "text",
+        "fontSize": 16,
+        "color": "#3D7C2F",
+        "bold": false
+      },
+      "width": 27,
+      "height": 21
+    },
+    {
+      "id": "fj1ve9tpr",
+      "type": "rect",
+      "x": 242,
+      "y": 1120,
+      "width": 397,
+      "height": 249,
+      "data": {
+        "fill": null,
+        "stroke": "#3D7C2F",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "37skpskjy",
+      "type": "text",
+      "x": 396,
+      "y": 1228,
+      "data": {
+        "content": "text",
+        "fontSize": 16,
+        "color": "#3D7C2F",
+        "bold": false
+      },
+      "width": 27,
+      "height": 21
+    },
+    {
+      "id": "3puek3t6a",
+      "type": "rect",
+      "x": 185,
+      "y": 1493,
+      "width": 944,
+      "height": 535,
+      "data": {
+        "fill": null,
+        "stroke": "#2D7DD2",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "31x34tmw9",
+      "type": "text",
+      "x": 620,
+      "y": 1843,
+      "data": {
+        "content": "crea tu propio brownie",
+        "fontSize": 16,
+        "color": "#2D7DD2",
+        "bold": false
+      },
+      "width": 100,
+      "height": 42
+    }
+  ]
+}

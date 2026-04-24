@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luz da Lua — Brownies Artesanales · Guayaquil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --choc:#1E0F07;
+  --choc2:#2B1B12;
+  --caramel:#C58A4A;
+  --caramel2:#D9A063;
+  --cream:#F5EDE6;
+  --beige:#EAD8CC;
+  --mid:#8B5E3C;
+  --text:#1E0F07;
+  --font-h:'Cormorant Garamond',Georgia,serif;
+  --font-b:'DM Sans',system-ui,sans-serif;
+  --r:14px;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:var(--font-b);overflow-x:hidden}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:64px;
+  background:rgba(30,15,7,.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(197,138,74,.12);
+  transition:background .3s;
+}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo img{height:38px;width:38px;object-fit:contain}
+.nav-logo span{font-family:var(--font-h);font-size:1.25rem;color:var(--cream);letter-spacing:.06em;font-weight:500}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{text-decoration:none;color:rgba(245,237,230,.6);font-size:.82rem;letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--caramel2)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-order{background:var(--caramel);color:#fff;border:none;padding:9px 20px;border-radius:100px;font-family:var(--font-b);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:.02em}
+.btn-order:hover{background:var(--caramel2);transform:scale(1.03)}
+.cart-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);cursor:pointer;color:var(--cream);font-size:.8rem;position:relative;padding:7px 14px;border-radius:100px;display:flex;align-items:center;gap:6px;font-family:var(--font-b);transition:background .2s}
+.cart-btn:hover{background:rgba(255,255,255,.13)}
+.cart-count{background:var(--caramel);color:#fff;font-size:.62rem;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:44fr 56fr;
+  padding-top:64px;
+  background:linear-gradient(135deg,#0D0500 0%,#1E0F07 40%,#2B1B12 70%,#3D2415 100%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 20% 50%,rgba(197,138,74,.08) 0%,transparent 70%);
+  pointer-events:none;z-index:1;
+}
+.hero-text{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8vw 3vw 8vw 7vw;color:var(--cream);
+  position:relative;z-index:2;
+}
+.eyebrow{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--caramel);margin-bottom:1.8rem;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--caramel);opacity:.6}
+.hero-title{font-family:var(--font-h);font-size:clamp(3.5rem,6vw,7rem);line-height:.95;margin-bottom:1.2rem;font-weight:500}
+.hero-title em{font-style:italic;color:var(--caramel2);display:block}
+.hero-sub{font-size:1rem;color:rgba(245,237,230,.65);font-weight:300;line-height:1.7;margin-bottom:2.5rem;max-width:340px}
+.hero-btns{display:flex;gap:.85rem;flex-wrap:wrap}
+.btn-primary{background:var(--caramel);color:#fff;border:none;padding:13px 28px;border-radius:100px;font-family:var(--font-b);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .22s;text-decoration:none;display:inline-block;letter-spacing:.02em}
+.btn-primary:hover{background:var(--caramel2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(197,138,74,.35)}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(245,237,230,.25);padding:13px 28px;border-radius:100px;font-family:var(--font-b);font-size:.85rem;font-weight:400;cursor:pointer;transition:all .22s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:var(--caramel);color:var(--caramel)}
+.hero-vid{position:relative;overflow:hidden;z-index:1}
+.hero-vid video{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.hero-vid::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,#1E0F07 0%,rgba(30,15,7,.3) 40%,transparent 100%);
+}
+.hero-vid::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,#1E0F07 0%,transparent 30%);
+}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(245,237,230,.35);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll span{width:1px;height:40px;background:linear-gradient(to bottom,rgba(197,138,74,.6),transparent);display:block}
+
+/* ─── SHARED ─── */
+.section-head{text-align:center;margin-bottom:60px}
+.section-title{font-family:var(--font-h);font-size:clamp(2.2rem,4vw,3.5rem);color:var(--choc);line-height:1;font-weight:500}
+.section-sub{font-size:.88rem;color:var(--mid);margin-top:.6rem;font-weight:300}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.fade-up.vis{opacity:1;transform:none}
+
+/* ─── PRODUCTS ─── */
+.products{background:var(--cream);padding:110px 6vw}
+.tabs{display:flex;justify-content:center;gap:.5rem;margin-bottom:52px;flex-wrap:wrap}
+.tab{background:transparent;border:1.5px solid var(--beige);color:var(--mid);padding:9px 22px;border-radius:100px;font-family:var(--font-b);font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.tab.on{background:var(--choc);color:var(--cream);border-color:var(--choc)}
+.tab:hover:not(.on){border-color:var(--caramel);color:var(--caramel)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;max-width:1200px;margin:0 auto}
+.pcard{background:#fff;border-radius:18px;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s;border:1px solid rgba(197,138,74,.08)}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(43,27,18,.14)}
+.pcard.featured{grid-column:span 2}
+@media(max-width:640px){.pcard.featured{grid-column:span 1}}
+.pcard-img{position:relative;overflow:hidden;aspect-ratio:4/3}
+.pcard.featured .pcard-img{aspect-ratio:16/7}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.pcard:hover .pcard-img img{transform:scale(1.06)}
+.pcard-badge{position:absolute;top:12px;left:12px;background:var(--caramel);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+.shine{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none}
+.pcard:hover .shine{opacity:1}
+.pinfo{padding:18px 20px 20px}
+.pname{font-family:var(--font-h);font-size:1.1rem;color:var(--choc);margin-bottom:3px;font-weight:500}
+.pdesc{font-size:.75rem;color:var(--mid);margin-bottom:14px;line-height:1.6;font-weight:300}
+/* shot selector */
+.shot-sel{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.shot-opt{padding:5px 12px;border:1.5px solid var(--beige);border-radius:100px;font-size:.72rem;cursor:pointer;color:var(--mid);background:none;transition:all .18s;font-family:var(--font-b)}
+.shot-opt.on{border-color:var(--caramel);color:var(--caramel);background:rgba(197,138,74,.07)}
+.pfoot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pprice{font-weight:700;color:var(--caramel);font-size:1.05rem;font-family:var(--font-h)}
+.qty-ctrl{display:flex;align-items:center;gap:6px}
+.qbtn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--beige);background:none;cursor:pointer;font-size:1rem;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1}
+.qbtn:hover{border-color:var(--caramel);color:var(--caramel);background:rgba(197,138,74,.06)}
+.qval{font-size:.88rem;font-weight:600;min-width:20px;text-align:center;color:var(--choc)}
+.btn-add{background:var(--choc);color:var(--cream);border:none;padding:8px 16px;border-radius:100px;font-family:var(--font-b);font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.02em}
+.btn-add:hover{background:var(--caramel)}
+
+/* ─── BUILDER ─── */
+.builder{background:linear-gradient(160deg,#0D0500 0%,#1E0F07 35%,#2B1B12 100%);padding:110px 6vw;color:var(--cream);position:relative;overflow:hidden}
+.builder::before{content:'';position:absolute;top:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(197,138,74,.07) 0%,transparent 70%);pointer-events:none}
+.builder-grid{display:grid;grid-template-columns:1fr 480px;gap:80px;align-items:start;max-width:1100px;margin:0 auto}
+
+/* steps */
+.steps-wrap{display:flex;flex-direction:column;gap:0}
+.step-block{padding:28px 0;border-bottom:1px solid rgba(245,237,230,.08);position:relative}
+.step-block:last-of-type{border-bottom:none}
+.step-indicator{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.step-num-circle{width:28px;height:28px;border-radius:50%;background:rgba(197,138,74,.15);border:1px solid rgba(197,138,74,.35);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:var(--caramel);letter-spacing:.1em;flex-shrink:0}
+.step-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,237,230,.45)}
+.step-title{font-family:var(--font-h);font-size:1.6rem;font-weight:500;margin-bottom:20px;line-height:1}
+
+/* base options */
+.base-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.base-btn{padding:18px 14px;border:1.5px solid rgba(245,237,230,.12);border-radius:14px;background:rgba(245,237,230,.03);color:var(--cream);cursor:pointer;text-align:center;transition:all .22s;font-family:var(--font-b);position:relative;overflow:hidden}
+.base-btn.on{border-color:var(--caramel);background:rgba(197,138,74,.1)}
+.base-btn:hover:not(.on){border-color:rgba(197,138,74,.35);background:rgba(197,138,74,.05)}
+.base-btn-icon{font-size:2rem;margin-bottom:8px;display:block}
+.base-btn-name{font-size:.9rem;font-weight:600;display:block;margin-bottom:2px}
+.base-btn-price{font-size:.72rem;color:var(--caramel);opacity:.8;display:block}
+.base-btn-check{position:absolute;top:10px;right:10px;width:18px;height:18px;border-radius:50%;background:var(--caramel);display:none;align-items:center;justify-content:center}
+.base-btn.on .base-btn-check{display:flex}
+.base-btn-check::after{content:'✓';font-size:.6rem;color:#fff;font-weight:700}
+
+/* toppings grid */
+.tops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.top-btn{padding:14px 8px 10px;border:1.5px solid rgba(245,237,230,.1);border-radius:12px;background:rgba(245,237,230,.03);color:var(--cream);cursor:pointer;text-align:center;transition:all .2s;font-family:var(--font-b);position:relative}
+.top-btn.on{border-color:var(--caramel);background:rgba(197,138,74,.1)}
+.top-btn:hover:not(.on){border-color:rgba(197,138,74,.3);background:rgba(197,138,74,.04)}
+.top-swatch{width:24px;height:24px;border-radius:50%;margin:0 auto 8px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.top-name{font-size:.72rem;font-weight:500;line-height:1.3;display:block}
+.top-price{font-size:.6rem;color:var(--caramel);opacity:.7;margin-top:3px;display:block}
+.top-check{position:absolute;top:6px;right:6px;width:14px;height:14px;border-radius:50%;background:var(--caramel);display:none;align-items:center;justify-content:center}
+.top-btn.on .top-check{display:flex}
+.top-check::after{content:'✓';font-size:.5rem;color:#fff;font-weight:700}
+
+/* builder summary */
+.builder-summary{margin-top:28px;padding:20px;background:rgba(245,237,230,.05);border-radius:14px;border:1px solid rgba(245,237,230,.08)}
+.bsum-row{display:flex;justify-content:space-between;font-size:.78rem;color:rgba(245,237,230,.55);margin-bottom:6px}
+.bsum-total{display:flex;justify-content:space-between;font-family:var(--font-h);font-size:1.6rem;font-weight:500;color:var(--cream);margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,237,230,.1)}
+.bsum-total span:last-child{color:var(--caramel)}
+.btn-builder-add{width:100%;background:var(--caramel);color:#fff;border:none;padding:15px 24px;border-radius:100px;font-family:var(--font-b);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .22s;margin-top:14px;letter-spacing:.02em}
+.btn-builder-add:hover{background:var(--caramel2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(197,138,74,.3)}
+
+/* preview side */
+.preview-panel{position:sticky;top:96px}
+.preview-label-wrap{text-align:center;margin-bottom:16px}
+.preview-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(197,138,74,.7)}
+.preview-box{background:rgba(245,237,230,.04);border:1px solid rgba(245,237,230,.07);border-radius:20px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;gap:12px}
+#bsvg{width:100%;max-width:340px;filter:drop-shadow(0 20px 48px rgba(0,0,0,.6))}
+.preview-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-height:24px}
+.ptag{background:rgba(197,138,74,.15);color:var(--caramel);font-size:.62rem;padding:3px 10px;border-radius:100px;border:1px solid rgba(197,138,74,.25)}
+.preview-hint{font-size:.68rem;color:rgba(245,237,230,.25);text-align:center;margin-top:4px}
+
+/* ─── STORY ─── */
+.story{background:var(--beige);padding:110px 6vw;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.story-img{border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 32px 80px rgba(43,27,18,.18)}
+.story-img img{width:100%;height:100%;object-fit:cover}
+.story-text .eyebrow{margin-bottom:18px}
+.story-text h2{font-family:var(--font-h);font-size:clamp(2rem,3.5vw,3rem);color:var(--choc);margin-bottom:24px;line-height:1.1;font-weight:500}
+.story-text p{color:var(--mid);line-height:1.9;font-size:.95rem;margin-bottom:16px;font-weight:300}
+.signature{font-family:var(--font-h);font-style:italic;font-size:1.5rem;color:var(--caramel)}
+
+/* ─── FINAL CTA ─── */
+.fcta{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.fcta-bg{position:absolute;inset:0}
+.fcta-bg img{width:100%;height:100%;object-fit:cover}
+.fcta-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,4,1,.55) 0%,rgba(12,4,1,.75) 100%)}
+.fcta-content{position:relative;z-index:1;color:var(--cream);padding:60px 6vw}
+.fcta-content h2{font-family:var(--font-h);font-size:clamp(2.5rem,5.5vw,4.5rem);margin-bottom:14px;font-weight:500;line-height:1}
+.fcta-content p{font-size:1rem;opacity:.65;margin-bottom:36px;font-weight:300}
+.btn-wa{background:#25D366;color:#fff;border:none;padding:16px 36px;border-radius:100px;font-family:var(--font-b);font-size:.95rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .22s;letter-spacing:.02em}
+.btn-wa:hover{background:#1aad54;transform:scale(1.04);box-shadow:0 8px 30px rgba(37,211,102,.3)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
+.fbrand{display:flex;align-items:center;gap:10px}
+.fbrand img{height:36px;width:36px;object-fit:contain;opacity:.7}
+.fbrand span{font-family:var(--font-h);color:var(--cream);font-size:1.1rem;font-weight:500}
+.flinks{display:flex;gap:20px;justify-content:center}
+.flinks a{color:rgba(245,237,230,.45);text-decoration:none;font-size:.78rem;transition:color .2s;display:flex;align-items:center;gap:7px}
+.flinks a:hover{color:var(--caramel)}
+.fcopy{text-align:right;font-size:.68rem;line-height:1.7}
+
+/* ─── CART PANEL ─── */
+.cart-ov{position:fixed;inset:0;background:rgba(10,3,1,.5);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+.cart-ov.open{opacity:1;pointer-events:all}
+.cart-panel{position:fixed;right:0;top:0;bottom:0;width:390px;max-width:92vw;background:var(--cream);z-index:201;transform:translateX(100%);transition:transform .4s var(--ease);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(10,3,1,.25)}
+.cart-panel.open{transform:none}
+.cart-head{padding:22px 24px;border-bottom:1px solid var(--beige);display:flex;justify-content:space-between;align-items:center;background:#fff}
+.cart-head h3{font-family:var(--font-h);font-size:1.4rem;color:var(--choc);font-weight:500}
+.cart-close{background:rgba(30,15,7,.07);border:none;font-size:1.1rem;cursor:pointer;color:var(--mid);line-height:1;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cart-close:hover{background:rgba(30,15,7,.12)}
+.cart-items{flex:1;overflow-y:auto;padding:8px 16px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--mid);font-size:.88rem;line-height:1.7}
+.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--beige);align-items:center}
+.ci-img{width:60px;height:60px;border-radius:10px;object-fit:cover;background:var(--beige);flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:.84rem;font-weight:500;color:var(--choc);line-height:1.3}
+.ci-price{font-size:.8rem;color:var(--caramel);margin-top:3px;font-weight:600}
+.ci-rm{background:none;border:none;color:rgba(139,94,60,.45);cursor:pointer;font-size:1rem;padding:6px;transition:color .2s;flex-shrink:0}
+.ci-rm:hover{color:var(--caramel)}
+.cart-foot{padding:18px 20px;border-top:1px solid var(--beige);background:#fff}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:4px;color:var(--mid);font-size:.8rem}
+.cart-total-big{display:flex;justify-content:space-between;margin-bottom:16px;font-weight:700;color:var(--choc);font-family:var(--font-h);font-size:1.4rem}
+.cart-total-big span:last-child{color:var(--caramel)}
+.btn-wa-full{background:#25D366;color:#fff;border:none;padding:14px 24px;border-radius:100px;font-family:var(--font-b);font-size:.87rem;font-weight:600;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .22s;width:100%}
+.btn-wa-full:hover{background:#1aad54}
+
+/* ─── WHATSAPP FAB ─── */
+.wa-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;border:none;cursor:pointer;z-index:300;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;text-decoration:none}
+.wa-fab:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(37,211,102,.55);background:#1aad54}
+.wa-fab svg{width:28px;height:28px;position:relative;z-index:1}
+.wa-fab::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #25D366;opacity:.5;animation:waPulse 2s infinite;pointer-events:none}
+@keyframes waPulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.45);opacity:0}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr}
+  .hero-vid{height:55vw;min-height:280px}
+  .hero-vid::before{background:linear-gradient(to bottom,#1E0F07 0%,rgba(30,15,7,.2) 50%,transparent 100%)}
+  .builder-grid{grid-template-columns:1fr}
+  .preview-panel{position:static}
+  .story{grid-template-columns:1fr;gap:40px}
+  .story-img{aspect-ratio:16/9}
+  .nav-links{display:none}
+  footer{grid-template-columns:1fr;text-align:center;gap:16px}
+  .fcopy,.fbrand{justify-content:center}
+  .flinks{flex-wrap:wrap}
+  .fcopy{text-align:center}
+}
+@media(max-width:640px){
+  .base-opts{grid-template-columns:1fr 1fr}
+  .tops-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-text{padding:10vw 6vw 8vw}
+  .products,.builder,.story,.fcta-content{padding-left:5vw;padding-right:5vw}
+  .products,.builder{padding-top:70px;padding-bottom:70px}
+  .story{padding:70px 5vw}
+  .builder-grid{gap:40px}
+  .nav-logo span{display:none}
+  nav{padding:0 4vw;height:58px}
+  .hero{padding-top:58px}
+  .hero-btns{width:100%}
+  .hero-btns .btn-primary,.hero-btns .btn-ghost{flex:1;text-align:center;padding:13px 18px;font-size:.82rem}
+  .pgrid{gap:14px}
+  .cart-btn{padding:7px 10px;font-size:.72rem}
+  .cart-btn svg{width:12px;height:12px}
+  .wa-fab{bottom:18px;right:18px;width:52px;height:52px}
+  .wa-fab svg{width:26px;height:26px}
+  .section-head{margin-bottom:40px}
+  footer{padding:40px 5vw 24px}
+}
+@media(max-width:420px){
+  .cart-panel{width:100vw;max-width:100vw}
+  .tabs{gap:.35rem}
+  .tab{padding:8px 16px;font-size:.72rem}
+  .pinfo{padding:14px 16px 16px}
+  .pfoot{gap:6px}
+  .btn-add{padding:7px 12px;font-size:.7rem}
+  .qbtn{width:26px;height:26px}
+  .base-btn{padding:14px 10px}
+  .base-btn-icon{font-size:1.6rem}
+  .step-title{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#inicio" class="nav-logo">
+    <img src="uploads/Logo.png" alt="Luz da Lua">
+    <span>Luz da Lua</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#crea">Crea tu brownie</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#productos" class="btn-order">Ordenar ahora</a>
+    <button class="cart-btn" onclick="openCart()" aria-label="Carrito">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Carrito <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero" data-screen-label="Hero">
+  <div class="hero-text">
+    <span class="eyebrow">Guayaquil, Ecuador</span>
+    <h1 class="hero-title">Brownies<br><em>que no se olvidan.</em></h1>
+    <p class="hero-sub">Hechos artesanalmente en Guayaquil por Gigi, con ingredientes reales y mucho cariño.</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn-primary">Ver productos</a>
+      <a href="https://wa.me/593980821625?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20Luz%20da%20Lua%20%F0%9F%8D%AB" class="btn-ghost" target="_blank">Pedir ahora</a>
+    </div>
+  </div>
+  <div class="hero-vid" id="heroVid">
+    <video autoplay muted loop playsinline src="uploads/Brownie_looping_animation_202604232344-214f12e1.mp4"></video>
+  </div>
+  <div class="hero-scroll"><span></span>Scroll</div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="productos" class="products" data-screen-label="Productos">
+  <div class="section-head fade-up">
+    <span class="eyebrow" style="justify-content:center">Nuestros productos</span>
+    <h2 class="section-title">Cada pieza, una obra</h2>
+    <p class="section-sub">Todos los precios en dólares · Guayaquil, Ecuador</p>
+  </div>
+  <div class="tabs fade-up">
+    <button class="tab on" onclick="filterCat('all',this)">Todos</button>
+    <button class="tab" onclick="filterCat('2pisos',this)">2 Pisos</button>
+    <button class="tab" onclick="filterCat('shot',this)">Shots</button>
+  </div>
+  <div class="pgrid" id="pgrid"></div>
+</section>
+
+<!-- BUILDER -->
+<section id="crea" class="builder" data-screen-label="Builder">
+  <div class="section-head fade-up">
+    <span class="eyebrow" style="justify-content:center;color:var(--caramel)">Personaliza tu pedido</span>
+    <h2 class="section-title" style="color:var(--cream)">Crea tu brownie</h2>
+    <p class="section-sub" style="color:rgba(245,237,230,.45)">Elige la base, agrega tus toppings y listo</p>
+  </div>
+
+  <div class="builder-grid">
+    <!-- Controls -->
+    <div class="steps-wrap fade-up">
+
+      <!-- Step 1 -->
+      <div class="step-block">
+        <div class="step-indicator">
+          <div class="step-num-circle">01</div>
+          <span class="step-label">Selecciona tu base</span>
+        </div>
+        <h3 class="step-title">¿Cuántos pisos?</h3>
+        <div class="base-opts">
+          <button class="base-btn on" onclick="selectBase('1piso',this)">
+            <div class="base-btn-check"></div>
+            <span class="base-btn-icon">🍫</span>
+            <span class="base-btn-name">1 Piso</span>
+            <span class="base-btn-price">Desde $2.00</span>
+          </button>
+          <button class="base-btn" onclick="selectBase('2pisos',this)">
+            <div class="base-btn-check"></div>
+            <span class="base-btn-icon">🍰</span>
+            <span class="base-btn-name">2 Pisos</span>
+            <span class="base-btn-price">Desde $3.50</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-block">
+        <div class="step-indicator">
+          <div class="step-num-circle">02</div>
+          <span class="step-label">Elige tus toppings</span>
+        </div>
+        <h3 class="step-title">Toppings al gusto</h3>
+        <div class="tops-grid" id="tgrid"></div>
+      </div>
+
+      <!-- Summary -->
+      <div class="builder-summary">
+        <div class="bsum-row"><span>Base seleccionada</span><span id="bsumBase">1 Piso</span></div>
+        <div class="bsum-row"><span>Toppings</span><span id="bsumTops">Ninguno</span></div>
+        <div class="bsum-total"><span>Total</span><span id="bsumPrice">$2.00</span></div>
+        <button class="btn-builder-add" onclick="addBuilderToCart()">Agregar al pedido →</button>
+      </div>
+
+    </div>
+
+    <!-- Preview -->
+    <div class="preview-panel fade-up">
+      <div class="preview-label-wrap"><span class="preview-label">Vista previa en vivo</span></div>
+      <div class="preview-box">
+        <svg id="bsvg" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="preview-tags" id="previewTags"></div>
+        <p class="preview-hint">Vista ilustrativa · los sabores pueden variar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" data-screen-label="Historia">
+  <div class="story-img fade-up">
+    <img src="uploads/pasted-1777007570763-1.png" alt="Brownies artesanales de Gigi" loading="lazy">
+  </div>
+  <div class="story-text fade-up">
+    <span class="eyebrow">Nuestra historia</span>
+    <h2>Hecho a mano,<br>con ingredientes<br>reales.</h2>
+    <p>Cada brownie está hecho a mano en Guayaquil, con ingredientes reales y mucho cariño. Gigi pone su corazón en cada pieza, desde la mezcla hasta el toque final.</p>
+    <p>No te quedes con hambre… escríbeme y agenda tu pedido.</p>
+    <p class="signature">— Gigi ♡</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="contacto" class="fcta" data-screen-label="CTA Final">
+  <div class="fcta-bg"><img src="uploads/Brownie 2 pisos manjar y chocolate .png" alt="" loading="lazy"></div>
+  <div class="fcta-ov"></div>
+  <div class="fcta-content fade-up">
+    <h2>¿Listo para<br><em style="font-style:italic;color:var(--caramel2)">probarlos?</em></h2>
+    <p>Escríbenos por WhatsApp y agenda tu pedido.<br>Despacho y retiro disponible en Guayaquil.</p>
+    <a href="https://wa.me/593980821625?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20Luz%20da%20Lua%20%F0%9F%8D%AB" class="btn-wa" target="_blank">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand">
+    <img src="uploads/Logo.png" alt="Logo">
+    <span>Luz da Lua</span>
+  </div>
+  <div class="flinks">
+    <a href="https://www.instagram.com/luzdalua.ec" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @luzdalua.ec
+    </a>
+    <a href="https://wa.me/593980821625" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      +593 98 082 1625
+    </a>
+    <a href="#contacto">📍 Guayaquil, Ecuador</a>
+  </div>
+  <p class="fcopy">© 2026 Luz da Lua<br>Todos los derechos reservados</p>
+</footer>
+
+<!-- CART PANEL -->
+<div class="cart-ov" id="cartOv" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h3>Tu pedido</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Aún no has agregado nada 🍫<br><small>¡Elige algo rico arriba!</small></div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+    <div class="cart-total-big"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <a href="#" class="btn-wa-full" id="waLink" target="_blank">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar pedido por WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/593980821625?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20Luz%20da%20Lua%20%F0%9F%8D%AB" class="wa-fab" target="_blank" rel="noopener" aria-label="Contactar al chef por WhatsApp" title="Chatear con el chef">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const WA = '593980821625';
+
+// ── PRODUCTS ──
+const PRODS = [
+  {
+    id:1, cat:'2pisos', featured:true,
+    name:'Brownie 2 Pisos',
+    desc:'Dos capas de brownie intenso con topping al gusto. La experiencia completa.',
+    price:3.50, img:'uploads/Brownie 2 pisos manjar y chocolate .png', badge:'Más pedido'
+  },
+  {
+    id:2, cat:'2pisos', featured:false,
+    name:'Pack 6 Brownies 2 Pisos',
+    desc:'Seis brownies de 2 pisos. Ideal para compartir (o no).',
+    price:18.00, img:'uploads/x6 2 pisos brownie.png', badge:'Promo'
+  },
+  {
+    id:3, cat:'1piso', featured:false,
+    name:'Brownie 1 Piso',
+    desc:'El clásico. Chocolate intenso, crujiente por fuera, fundente por dentro.',
+    price:2.00, img:'uploads/x1 1 piso brownie.png'
+  },
+  {
+    id:4, cat:'1piso', featured:false,
+    name:'Pack 6 Brownies 1 Piso',
+    desc:'Seis brownies clásicos de 1 piso. El pack perfecto.',
+    price:10.00, img:'uploads/brownies x6 1 piso.png', badge:'Ahorra $2'
+  },
+  {
+    id:5, cat:'shot', featured:false,
+    name:'Shot de Brownie',
+    desc:'Brownie en vasito. Elige el sabor que más te guste.',
+    price:1.00, img:'uploads/shot chocolate x1.png',
+    variants:['Chocolate','Manjar','Oreo']
+  },
+  {
+    id:6, cat:'shot', featured:false,
+    name:'Pack 9 Shots',
+    desc:'Nueve shots para probar todos los sabores. El favorito para eventos.',
+    price:7.50, img:'uploads/chocolate shot x9.png', badge:'Promo'
+  },
+];
+
+let curCat='all', qtys={}, selVariants={};
+PRODS.forEach(p=>{qtys[p.id]=1; if(p.variants)selVariants[p.id]=p.variants[0];});
+
+function fmtPrice(p){return '$'+p.toFixed(2);}
+
+function renderProds(){
+  const list = curCat==='all' ? PRODS : PRODS.filter(p=>p.cat===curCat||p.cat===curCat);
+  const validList = curCat==='all' ? PRODS : PRODS.filter(p=>p.cat===curCat);
+  document.getElementById('pgrid').innerHTML = validList.map(p=>`
+    <div class="pcard${p.featured?' featured':''}">
+      <div class="pcard-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        ${p.badge?`<div class="pcard-badge">${p.badge}</div>`:''}
+        <div class="shine"></div>
+      </div>
+      <div class="pinfo">
+        <h3 class="pname">${p.name}</h3>
+        <p class="pdesc">${p.desc}</p>
+        ${p.variants?`<div class="shot-sel">${p.variants.map(v=>`<button class="shot-opt${selVariants[p.id]===v?' on':''}" onclick="selVariant(${p.id},'${v}',this)">${v}</button>`).join('')}</div>`:''}
+        <div class="pfoot">
+          <span class="pprice">${fmtPrice(p.price)}</span>
+          <div class="qty-ctrl">
+            <button class="qbtn" onclick="chgQty(${p.id},-1)">−</button>
+            <span class="qval" id="q${p.id}">1</span>
+            <button class="qbtn" onclick="chgQty(${p.id},1)">+</button>
+            <button class="btn-add" onclick="addProd(${p.id})">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+  initFadeUps();
+}
+
+function filterCat(cat,btn){
+  curCat=cat;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderProds();
+}
+function chgQty(id,d){
+  qtys[id]=Math.max(1,(qtys[id]||1)+d);
+  const e=document.getElementById('q'+id);
+  if(e)e.textContent=qtys[id];
+}
+function selVariant(id,v,btn){
+  selVariants[id]=v;
+  btn.closest('.shot-sel').querySelectorAll('.shot-opt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ── CART ──
+let cart=[];
+function addProd(id){
+  const p=PRODS.find(x=>x.id===id);
+  const q=qtys[id]||1;
+  const variant=selVariants[id]?` (${selVariants[id]})`:'';
+  const key=id+'_'+(selVariants[id]||'');
+  const ex=cart.find(i=>i.key===key);
+  if(ex){ex.qty+=q;}
+  else{cart.push({key,id,name:p.name+variant,img:p.img,price:p.price,qty:q});}
+  updateCart();openCart();
+}
+function removeItem(key){
+  cart=cart.filter(i=>i.key!==key);
+  updateCart();
+}
+function buildWAMessage(){
+  if(!cart.length)return'';
+  let msg='Hola! Quiero hacer un pedido:\n\n';
+  cart.forEach(i=>{
+    msg+=`- ${i.name} x${i.qty} (${fmtPrice(i.price*i.qty)})\n`;
+  });
+  const tot=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  msg+=`\nTotal: ${fmtPrice(tot)}\n\n¿Está disponible?`;
+  return msg;
+}
+function updateCart(){
+  const tot=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const cnt=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent=cnt;
+  document.getElementById('cartSubtotal').textContent=fmtPrice(tot);
+  document.getElementById('cartTotal').textContent=fmtPrice(tot);
+  const waMsg=buildWAMessage();
+  document.getElementById('waLink').href=waMsg
+    ?`https://wa.me/${WA}?text=${encodeURIComponent(waMsg)}`
+    :`https://wa.me/${WA}`;
+  const el=document.getElementById('cartItems');
+  if(!cart.length){
+    el.innerHTML='<div class="cart-empty">Aún no has agregado nada 🍫<br><small>¡Elige algo rico arriba!</small></div>';
+    return;
+  }
+  el.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <img class="ci-img" src="${item.img}" alt="${item.name}">
+      <div class="ci-info">
+        <div class="ci-name">${item.name} ×${item.qty}</div>
+        <div class="ci-price">${fmtPrice(item.price*item.qty)}</div>
+      </div>
+      <button class="ci-rm" onclick="removeItem('${item.key}')">✕</button>
+    </div>`).join('');
+}
+function openCart(){
+  document.getElementById('cartPanel').classList.add('open');
+  document.getElementById('cartOv').classList.add('open');
+}
+function closeCart(){
+  document.getElementById('cartPanel').classList.remove('open');
+  document.getElementById('cartOv').classList.remove('open');
+}
+
+// ── BUILDER ──
+const TOPS=[
+  {id:'manjar',   label:'Manjar',           color:'#C07A2A', type:'sauce'},
+  {id:'choc',     label:'Chocolate',         color:'#1A0805', type:'sauce', border:true},
+  {id:'peanut',   label:'Mantequilla de Maní',color:'#C89040',type:'sauce'},
+  {id:'mora',     label:'Mermelada de Mora', color:'#6B2F8E', type:'jam'},
+  {id:'frutilla', label:'Mermelada Frutilla',color:'#B02020', type:'jam'},
+  {id:'oreo',     label:'Oreo Crumble',      color:'#2A2020', type:'crumb'},
+];
+const BASE_PRICES={'1piso':2.00,'2pisos':3.50};
+const TOP_PRICE=0.50;
+let selBase='1piso', selTops=new Set();
+
+function renderTops(){
+  document.getElementById('tgrid').innerHTML=TOPS.map(t=>`
+    <button class="top-btn${selTops.has(t.id)?' on':''}" onclick="toggleTop('${t.id}',this)">
+      <div class="top-check"></div>
+      <div class="top-swatch" style="background:${t.color}${t.border?';box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)':''}"></div>
+      <span class="top-name">${t.label}</span>
+      <span class="top-price">+${fmtPrice(TOP_PRICE)}</span>
+    </button>`).join('');
+}
+
+function toggleTop(id,btn){
+  selTops.has(id)?selTops.delete(id):selTops.add(id);
+  btn.classList.toggle('on');
+  updateBuilderUI();drawBrownie();
+}
+function selectBase(base,btn){
+  selBase=base;
+  document.querySelectorAll('.base-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  updateBuilderUI();drawBrownie();
+}
+function updateBuilderUI(){
+  const price=BASE_PRICES[selBase]+(selTops.size*TOP_PRICE);
+  document.getElementById('bsumBase').textContent=selBase==='2pisos'?'2 Pisos':'1 Piso';
+  document.getElementById('bsumTops').textContent=selTops.size?[...selTops].map(id=>TOPS.find(t=>t.id===id)?.label).join(', '):'Ninguno';
+  document.getElementById('bsumPrice').textContent=fmtPrice(price);
+  // preview tags
+  const tags=document.getElementById('previewTags');
+  const names=[...selTops].map(id=>TOPS.find(t=>t.id===id)?.label).filter(Boolean);
+  tags.innerHTML=names.map(n=>`<span class="ptag">${n}</span>`).join('');
+}
+function addBuilderToCart(){
+  const price=BASE_PRICES[selBase]+(selTops.size*TOP_PRICE);
+  const tnames=[...selTops].map(id=>TOPS.find(t=>t.id===id)?.label).filter(Boolean).join(', ');
+  const name=`Brownie ${selBase==='2pisos'?'2 Pisos':'1 Piso'}${tnames?' · '+tnames:''}`;
+  const key='b'+Date.now();
+  cart.push({
+    key,id:key,
+    name,
+    img:selBase==='2pisos'?'uploads/Brownie 2 pisos manjar y chocolate .png':'uploads/x1 1 piso brownie.png',
+    price,qty:1
+  });
+  updateCart();openCart();
+}
+
+// ── SVG BROWNIE ──
+const CRUMBS=[[40,0],[70,-7],[105,2],[138,-5],[170,1],[200,-8],[228,2],[258,-4],[285,1],[55,-14],[90,-12],[125,-17],[160,-10],[193,-15],[224,-12],[254,-16]];
+function drawBrownie(){
+  const svg=document.getElementById('bsvg');
+  const is2=selBase==='2pisos';
+  const activeTops=[...selTops].map(id=>TOPS.find(t=>t.id===id)).filter(Boolean);
+  const sauces=activeTops.filter(t=>t.type==='sauce'||t.type==='jam');
+  const hasCrumb=activeTops.some(t=>t.type==='crumb');
+  const bX=30,bW=300,bR=12;
+  const l1Y=is2?215:190, l1H=is2?65:85;
+  const l2Y=is2?128:0, l2H=62;
+  const topY=is2?l2Y:l1Y;
+  let s=`<defs>
+    <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A2010"/><stop offset="60%" stop-color="#200A04"/><stop offset="100%" stop-color="#120302"/>
+    </linearGradient>
+    <linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3D1C0C"/><stop offset="100%" stop-color="#160504"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,.12)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <filter id="ds" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#060100" flood-opacity=".7"/>
+    </filter>
+    <filter id="ds2" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#060100" flood-opacity=".5"/>
+    </filter>
+  </defs>`;
+
+  // parchment paper below
+  s+=`<rect x="${bX-8}" y="${l1Y+l1H+4}" width="${bW+16}" height="12" rx="4" fill="#EDE0CC" opacity=".35"/>`;
+
+  // layer 1 (bottom)
+  s+=`<rect x="${bX}" y="${l1Y}" width="${bW}" height="${l1H}" rx="${bR}" fill="url(#lg1)" filter="url(#ds)"/>`;
+  s+=`<rect x="${bX}" y="${l1Y}" width="${bW}" height="${l1H*.45}" rx="${bR}" fill="url(#gloss)" opacity=".5"/>`;
+  s+=brownieTex(bX,l1Y,bW,l1H);
+
+  if(is2){
+    // sauce between layers
+    const midC=sauces.length?sauces[0].color:'#A86520';
+    s+=`<rect x="${bX-6}" y="${l1Y-14}" width="${bW+12}" height="16" rx="6" fill="${midC}" opacity=".92"/>`;
+    // layer 2 (top)
+    s+=`<rect x="${bX}" y="${l2Y}" width="${bW}" height="${l2H}" rx="${bR}" fill="url(#lg2)" filter="url(#ds2)"/>`;
+    s+=`<rect x="${bX}" y="${l2Y}" width="${bW}" height="${l2H*.45}" rx="${bR}" fill="url(#gloss)" opacity=".45"/>`;
+    s+=brownieTex(bX,l2Y,bW,l2H);
+  }
+
+  // top sauce drips
+  sauces.forEach((sauce,i)=>{
+    const inset=i*8, w=bW-inset*2;
+    s+=`<rect x="${bX+inset}" y="${topY-14+i*3}" width="${w}" height="16" rx="7" fill="${sauce.color}" opacity="${0.95-i*.15}"/>`;
+    const dripXs=[bX+bW*.15+i*18, bX+bW*.48+i*14, bX+bW*.75-i*12];
+    dripXs.forEach((dx,di)=>{
+      const dh=14+((i*5+di)*11)%28;
+      s+=`<path d="M${dx-4},${topY+1} C${dx-5},${topY+dh*.35} ${dx+5},${topY+dh*.65} ${dx+3},${topY+dh} C${dx-2},${topY+dh+7} ${dx-9},${topY+dh} ${dx-7},${topY+dh*.45} Z" fill="${sauce.color}" opacity=".85"/>`;
+    });
+  });
+
+  // oreo crumble
+  if(hasCrumb){
+    CRUMBS.forEach(([px,py])=>{
+      const sz=4+((px*2+py*9)%5);
+      s+=`<ellipse cx="${px+bX}" cy="${topY-14+py}" rx="${sz}" ry="${sz*.6}" fill="#111010" opacity=".95"/>`;
+      if((px+py)%7===0) s+=`<ellipse cx="${px+bX+1}" cy="${topY-17+py}" rx="${sz*.5}" ry="${sz*.35}" fill="#E0E0E0" opacity=".55"/>`;
+    });
+  }
+
+  // base gloss if no toppings
+  if(!sauces.length&&!hasCrumb){
+    s+=`<rect x="${bX+8}" y="${topY-11}" width="${bW-16}" height="13" rx="5" fill="#2A0D05" opacity=".6"/>`;
+    s+=`<ellipse cx="${bX+bW*.3}" cy="${topY-7}" rx="45" ry="4" fill="#3D1A08" opacity=".4"/>`;
+  }
+
+  svg.innerHTML=s;
+}
+function brownieTex(x,y,w,h){
+  let t='';
+  const pts=[[.12,.3],[.28,.55],[.48,.22],[.62,.65],[.78,.38],[.18,.72],[.68,.18],[.43,.8],[.88,.55],[.08,.48],[.55,.4],[.35,.15]];
+  pts.forEach(([px,py])=>{
+    t+=`<circle cx="${x+w*px}" cy="${y+h*py}" r="${2+((px*7+py*5)%2)}" fill="#080201" opacity=".4"/>`;
+  });
+  return t;
+}
+
+// ── SCROLL ──
+const animOn=true;
+window.addEventListener('scroll',()=>{
+  initFadeUps();
+},{passive:true});
+
+function initFadeUps(){
+  if(!animOn)return;
+  document.querySelectorAll('.fade-up:not(.vis)').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight*.92)el.classList.add('vis');
+  });
+}
+
+// ── INIT ──
+renderProds();
+renderTops();
+drawBrownie();
+updateBuilderUI();
+setTimeout(initFadeUps,80);
+</script>
+</body>
+</html>
