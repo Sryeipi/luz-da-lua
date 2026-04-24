@@ -472,13 +472,13 @@ body.hide-fab .wa-fab::after{animation:none}
             <div class="base-btn-check"></div>
             <span class="base-btn-icon">🍫</span>
             <span class="base-btn-name">1 Piso</span>
-            <span class="base-btn-price">Desde $2.00</span>
+            <span class="base-btn-price">Desde $3.00</span>
           </button>
           <button class="base-btn" onclick="selectBase('2pisos',this)">
             <div class="base-btn-check"></div>
             <span class="base-btn-icon">🍰</span>
             <span class="base-btn-name">2 Pisos</span>
-            <span class="base-btn-price">Desde $3.50</span>
+            <span class="base-btn-price">Desde $4.50</span>
           </button>
         </div>
       </div>
@@ -763,8 +763,8 @@ const TOPS=[
   {id:'frutilla', label:'Mermelada Frutilla',color:'#B02020', type:'jam'},
   {id:'oreo',     label:'Oreo Crumble',      color:'#2A2020', type:'crumb'},
 ];
-const BASE_PRICES={'1piso':2.00,'2pisos':3.50};
-const TOP_PRICE=0.50;
+const BASE_PRICES={'1piso':3.00,'2pisos':4.50};
+const TOP_PRICE=0.25;
 let selBase='1piso', selTops=new Set();
 
 function renderTops(){
