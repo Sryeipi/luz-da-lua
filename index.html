@@ -84,9 +84,6 @@ nav{
   content:'';position:absolute;inset:0;z-index:1;
   background:linear-gradient(to top,#1E0F07 0%,transparent 30%);
 }
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(245,237,230,.35);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
-.hero-scroll span{width:1px;height:40px;background:linear-gradient(to bottom,rgba(197,138,74,.6),transparent);display:block}
-
 /* ─── SHARED ─── */
 .section-head{text-align:center;margin-bottom:60px}
 .section-title{font-family:var(--font-h);font-size:clamp(2.2rem,4vw,3.5rem);color:var(--choc);line-height:1;font-weight:500}
@@ -191,7 +188,21 @@ nav{
 .story-text .eyebrow{margin-bottom:18px}
 .story-text h2{font-family:var(--font-h);font-size:clamp(2rem,3.5vw,3rem);color:var(--choc);margin-bottom:24px;line-height:1.1;font-weight:500}
 .story-text p{color:var(--mid);line-height:1.9;font-size:.95rem;margin-bottom:16px;font-weight:300}
-.signature{font-family:var(--font-h);font-style:italic;font-size:1.5rem;color:var(--caramel)}
+.signature{font-family:var(--font-h);font-style:italic;font-size:1.5rem;color:var(--caramel);margin:0}
+.chef-sig{display:flex;align-items:center;gap:16px;margin-top:30px}
+.chef-avatar-wrap{position:relative;width:72px;height:72px;flex-shrink:0}
+.chef-avatar-wrap::before{
+  content:'';position:absolute;inset:-10px;border-radius:50%;
+  background:url('uploads/chef-gigi.jpg') center 28%/cover;
+  filter:blur(14px) saturate(.9);opacity:.45;z-index:0;
+}
+.chef-avatar{
+  position:relative;z-index:1;
+  width:100%;height:100%;border-radius:50%;object-fit:cover;
+  object-position:center 28%;
+  border:3px solid var(--beige);
+  box-shadow:0 8px 22px rgba(43,27,18,.25);
+}
 
 /* ─── FINAL CTA ─── */
 .fcta{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
@@ -251,8 +262,69 @@ footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;
   .hero{grid-template-columns:1fr}
   .hero-vid{height:55vw;min-height:280px}
   .hero-vid::before{background:linear-gradient(to bottom,#1E0F07 0%,rgba(30,15,7,.2) 50%,transparent 100%)}
-  .builder-grid{grid-template-columns:1fr}
-  .preview-panel{position:static}
+  .builder-grid{grid-template-columns:1fr;gap:24px}
+  /* Vista previa sticky arriba en móvil, para que siempre se vea el brownie */
+  .preview-panel{
+    position:sticky;top:58px;z-index:20;
+    order:-1;
+    margin:0 -6vw;
+    padding:10px 6vw 12px;
+    background:linear-gradient(180deg,#1E0F07 0%,#1E0F07 70%,rgba(30,15,7,.96) 100%);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(197,138,74,.15);
+  }
+  .preview-label-wrap{display:none}
+  .preview-box{
+    flex-direction:row;
+    padding:10px 14px;
+    gap:14px;
+    border-radius:14px;
+    background:rgba(245,237,230,.05);
+  }
+  #bsvg{max-width:110px;min-width:90px;flex-shrink:0;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
+  .preview-tags{justify-content:flex-start;min-height:0;flex:1;gap:4px}
+  .ptag{font-size:.6rem;padding:2px 8px}
+  .preview-hint{display:none}
+  /* Builder compacto en móvil */
+  .builder > .section-head{margin-bottom:14px}
+  .builder .section-title{font-size:1.9rem}
+  .builder .section-sub{font-size:.78rem}
+  .step-label{display:none}
+  .step-indicator{margin-bottom:10px;gap:0}
+  .step-num-circle{display:none}
+  .step-block{padding:14px 0}
+  .step-title{font-size:1.15rem;margin-bottom:12px}
+  .base-btn{padding:12px 10px}
+  .base-btn-icon{font-size:1.5rem;margin-bottom:4px}
+  .base-btn-name{font-size:.82rem}
+  .base-btn-price{font-size:.65rem}
+  .top-btn{padding:10px 4px 8px}
+  .top-swatch{width:22px;height:22px;margin-bottom:6px}
+  .top-name{font-size:.68rem}
+  .top-price{font-size:.56rem;margin-top:2px}
+  /* Barra de acción sticky al fondo: total + botón siempre visibles */
+  .builder-summary{
+    position:sticky;bottom:0;z-index:15;
+    margin:14px -6vw 0;border-radius:0;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom,0));
+    background:rgba(10,4,0,.94);
+    backdrop-filter:blur(16px);
+    border:none;border-top:1px solid rgba(197,138,74,.22);
+    display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;
+  }
+  .bsum-row{display:none}
+  .bsum-total{
+    margin:0;padding:0;border:none;
+    display:flex;flex-direction:column;align-items:flex-start;
+    font-size:1.35rem;line-height:1;gap:3px;
+  }
+  .bsum-total span:first-child{
+    font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(245,237,230,.5);font-family:var(--font-b);font-weight:500;
+  }
+  .btn-builder-add{margin:0;padding:13px 16px;font-size:.82rem}
+  /* WhatsApp FAB encima de la barra sticky, sin chocar */
+  .wa-fab{bottom:88px !important}
   .story{grid-template-columns:1fr;gap:40px}
   .story-img{aspect-ratio:16/9}
   .nav-links{display:none}
@@ -262,13 +334,11 @@ footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;
   .fcopy{text-align:center}
 }
 @media(max-width:640px){
-  .base-opts{grid-template-columns:1fr 1fr}
-  .tops-grid{grid-template-columns:repeat(2,1fr)}
   .hero-text{padding:10vw 6vw 8vw}
-  .products,.builder,.story,.fcta-content{padding-left:5vw;padding-right:5vw}
-  .products,.builder{padding-top:70px;padding-bottom:70px}
+  .products,.story,.fcta-content{padding-left:5vw;padding-right:5vw}
+  .products{padding-top:70px;padding-bottom:70px}
+  .builder{padding:40px 5vw 20px}
   .story{padding:70px 5vw}
-  .builder-grid{gap:40px}
   .nav-logo span{display:none}
   nav{padding:0 4vw;height:58px}
   .hero{padding-top:58px}
@@ -333,7 +403,6 @@ footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;
   <div class="hero-vid" id="heroVid">
     <video autoplay muted loop playsinline src="uploads/Brownie_looping_animation_202604232344-214f12e1.mp4"></video>
   </div>
-  <div class="hero-scroll"><span></span>Scroll</div>
 </section>
 
 <!-- PRODUCTS -->
@@ -428,7 +497,12 @@ footer{background:var(--choc);color:rgba(245,237,230,.45);padding:52px 6vw 28px;
     <h2>Hecho a mano,<br>con ingredientes<br>reales.</h2>
     <p>Cada brownie está hecho a mano en Guayaquil, con ingredientes reales y mucho cariño. Gigi pone su corazón en cada pieza, desde la mezcla hasta el toque final.</p>
     <p>No te quedes con hambre… escríbeme y agenda tu pedido.</p>
-    <p class="signature">— Gigi ♡</p>
+    <div class="chef-sig">
+      <div class="chef-avatar-wrap">
+        <img src="uploads/chef-gigi.jpg" alt="Gigi, la chef de Luz da Lua" class="chef-avatar" loading="lazy">
+      </div>
+      <p class="signature">— Gigi ♡</p>
+    </div>
   </div>
 </section>
 
